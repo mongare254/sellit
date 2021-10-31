@@ -1,0 +1,98 @@
+
+form {
+    width: 100%;
+    margin: 0;
+}
+.form_wrapper{
+    background-color:#D69B89;
+    padding: 50px;
+    border-radius: 20px;
+    margin-left: 10px;
+}
+.form_wrapper2{
+    background-color: #74D6BC;
+    padding: 50px;
+    border-radius: 20px;
+    margin-left: -30px;
+    overflow: hidden;
+}
+@media only screen and (max-width: 1260px){
+    .form_wrapper2{
+        margin-left: 0;
+        margin-top: 20px;
+    }
+}
+form * {
+    font-size: 20px;
+    letter-spacing: 0.075em;
+    font-weight: 300;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+form .field {
+    width: 100%;
+    position: relative;
+    margin-bottom: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    outline: none;
+}
+
+form .field label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(90deg, darkslateblue, #3D4C8A);
+    width: 100%;
+    height: 64px;
+    transition: width 333ms ease-in-out;
+    text-align: center;
+    padding: 18px 0;
+    color: white;
+}
+
+form .field input[type="text"],
+form .field input[type="file"], form .field select{
+    border: none;
+    width: 100%;
+    height: 64px;
+    margin:0;
+    padding-left: 30.5%;
+    color: black;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+form #item_description {
+    height: 64px;
+    resize: none;
+    transition: all 333ms ease-in-out;
+    padding-top: 18px;
+}
+form textarea:focus#item_description,
+form textarea:not(:placeholder-shown)#item_description {
+    height: 166px;
+}
+form input[type="text"]:focus + label,
+form input[type="text"]:not(:placeholder-shown) + label,
+form textarea:focus + label,
+form textarea:not(:placeholder-shown) + label,
+form .field:hover label {
+    width: auto;
+}
+.button_submit {
+    background: linear-gradient(90deg, #b13e8b, #812d65);
+    -webkit-appearance: none;
+    border: none;
+    position: relative;
+    padding: 13px 50px;
+    transition: all 0.3s ease-in-out;
+    border-radius:24px;
+    margin-left: 20%;
+}
+form input[type="submit"]:hover,
+form input[type="submit"]:focus {
+    background: #372056;
+}

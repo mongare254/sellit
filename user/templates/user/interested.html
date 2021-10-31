@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'user/sliders/css/checkout.css' %}">
+{% endblock %}
+{% block content %}
+
+    {#    //checkout form#}
+
+    <div id="wrapper">
+        <div id="container">
+            {% for i in item %}
+
+                <div id="info">
+                <img id="product"  src="{{ i.item_image.url }}"/>
+                    <p >{{ i.item_name}}</p>
+                    <p style="margin-top:-30px;">{{ i.description }}</p>
+                    <div id="price">
+                        <h2>{{ i.item_price}}</h2>
+                    </div>
+                </div>
+            {% endfor %}
+            <div id="payment">
+
+                <form id="checkout" method="POST" action="{% url 'mpesa:payitem' %}">
+                    {% csrf_token %}
+                    {% for message in messages %}
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>{{ message}}</strong>
+                        </div>
+                    {% endfor %}
+                    <input class="card" id="mpesa" type="button" name="card" value="">
+
+                    <label>Mpesa Number:</label>
+                    <input id="phonenumber" type="number" name="phone" required="true" placeholder="254700428022">
+
+                    <label>Amount:</label>
+                    <input id="amount" type="number" name="name" required="true" maxlength="50" placeholder="Amount">
+                    {% for j in item %}
+                        <input type="hidden" name="item_id" value="{{ j.id }}">
+                    {% endfor %}
+                    <input class="btn" type="submit" name="pay" value="Pay">
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <script src="{% static 'user/js/jquery-3.5.1.min.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $("#iToast").toggleClass("hide view");
+
+            $('a.exit--toast').click(function() {
+                $("#iToast").fadeOut(1000, 0);
+            });
+
+            $(document).on('click', function (e) {
+                if ($(e.target).closest(".notification--reminder").length === 0) {
+                    $("#iToast").fadeOut(1000, 0);
+                }
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,82 @@
+{%  extends 'base.html' %}
+{%  load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'user/css/additem.css' %}" xmlns="http://www.w3.org/1999/html">
+    <style>
+        .form-control{
+            background-color: #D69B89;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 form_wrapper">
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Success!</strong> {{ message}}
+                </div>
+            {% endfor %}
+            <h3 class="align-self-center">Register Item Below:</h3>
+            <form action="{% url 'user:additem' %}" method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <div class="field">
+                    <input type="text" id="item_name" name="item_name" placeholder="e.g Kettle" autofocus required/>
+                    <label for="name">Item Name</label>
+                </div>
+                <div class="field">
+                    <input type="text" id="item_description" name="description" placeholder=" e.g.High quality " required/>
+                    <label for="Item Description">Description</label>
+                </div>
+                <div class="field">
+                    <input type="file" accept='image/*'id="item_image" rows="4" name="item_image" required ></input>
+                    <label for="image">Image</label>
+                </div>
+                <div class="field">
+                    <select id="category" rows="4" name="category" required >
+                        {% for item in items %}
+                        <option value="{{ item.id}}">{{ item.title }}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="image">CATEGORY</label>
+                </div>
+                <div class="field">
+                    <input type="text" id="starting_price" name="starting_price" placeholder="Starting price e.g 23000 " required/>
+                    <label for="Starting Price">S.Price</label>
+                </div>
+                <div class="field">
+                    <input type="text" id="username" name="username" value="{{ cuser.user.username }}"  placeholder=" {{ cuser.firstname }} {{ cuser.secondname }}" readonly="readonly" />
+                    <label for="Names">NAMES</label>
+                </div>
+                <button class="button button_submit" type="submit" > SUBMIT</button>
+            </form>
+        </div>
+        <div class="col-md-6 form_wrapper2 ">
+            <h3 > Example of how to register your item:</h3>
+            <form class="form-group">
+                <div class="col-md-8 offset-2">
+                    <label>Item Name:</label>
+                    <input class="form-control" placeholder="hp laptop" disabled>
+                </div>
+                <div class="col-md-8 offset-2">
+                    <label>Description:</label>
+                    <textarea class="form-control" placeholder="2 GB RAM, 256HDD, 1.2GHZ, 3 years working" disabled></textarea>
+                </div>
+            </form>
+            <div class="col-md-8 offset-2">
+                <label>Item Image:</label>
+                <input  type="file" class="form-control" placeholder="image.png" disabled>
+            </div>
+            <div class="col-md-8 offset-2">
+                <label>Item Starting Price:</label>
+                <input  type="number" class="form-control" placeholder="Ksh.23000" disabled>
+            </div>
+            <div class="col-md-8 offset-2">
+                <label>Item Starting Price:</label><br>
+                <b>Please note..You can't edit this</b>
+                <input  type="text" class="form-control" placeholder="Displays username" disabled>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

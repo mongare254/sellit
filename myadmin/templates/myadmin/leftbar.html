@@ -1,0 +1,62 @@
+<div class="left-sidebar  box-shadow " style="background-color: #7386D5 !important;">
+    <div class="sidebar-content">
+        <div class="user-info closed">
+            <img src="" alt="" class="img-circle profile-img">
+            <h6 class="title">William Onchuru</h6>
+            <small class="info">Admin</small>
+        </div>
+        <!-- /.user-info -->
+
+        <div class="sidebar-nav">
+            <ul class="side-nav color-gray">
+                <li class="nav-header">
+                    <span class="">Main Category</span>
+                </li>
+                <li>
+                    <a href="{% url 'myadmin:dashboard' %}"><i class="fa fa-dashboard"></i> <span>Dashboard</span> </a>
+
+                </li>
+
+                <li class="nav-header">
+                    <span class="">Appearance</span>
+                </li>
+                <li class="has-children">
+                    <a href="#"><i class="fa fa-file-text"></i> <span>Users</span> <i class="fa fa-angle-right arrow"></i></a>
+                    <ul class="child-nav">
+                        <li><a href="{% url 'myadmin:adduser' %}"><i class="fa fa-bars"></i> <span>Add User</span></a></li>
+                        <li><a href=""><i class="fa fa fa-server"></i> <span>Manage Users </span></a></li>
+
+                    </ul>
+                </li>
+                <li class="has-children">
+                    <a href="#"><i class="fa fa-file-text"></i> <span>Items</span> <i class="fa fa-angle-right arrow"></i></a>
+                    <ul class="child-nav">
+                        <li><a href="{% url 'myadmin:additem' %}"><i class="fa fa-bars"></i> <span>Add Item</span></a></li>
+                        <li><a href=""><i class="fa fa fa-server"></i> <span>Manage Items</span></a></li>
+                        <li><a href=""><i class="fa fa fa-server"></i> <span>Interested Items</span></a></li>
+                    </ul>
+                </li>
+                <li class="has-children">
+                    <a href="#"><i class="fa fa-users"></i> <span>Payments</span> <i class="fa fa-angle-right arrow"></i></a>
+                    <ul class="child-nav">
+                        <li><a href=""><i class="fa fa-bars"></i> <span>Successfull Payments</span></a></li>
+                        <li><a href=""><i class="fa fa fa-server"></i> <span>Unsuccessful Payments</span></a></li>
+
+                    </ul>
+                </li>
+                <li class="has-children">
+                    <a href="#"><i class="fa fa-info-circle"></i> <span>Deliveries</span> <i class="fa fa-angle-right arrow"></i></a>
+                    <ul class="child-nav">
+                        <li><a href=""><i class="fa fa-bars"></i> <span>Add Delivery</span></a></li>
+                        <li><a href=""><i class="fa fa fa-server"></i> <span>Manage Delivery</span></a></li>
+
+                    </ul>
+                <li><a href=""><i class="fa fa fa-server"></i> <span> Admin Change Password</span></a></li>
+
+                </li>
+            </ul>
+        </div>
+        <!-- /.sidebar-nav -->
+    </div>
+    <!-- /.sidebar-content -->
+</div>

@@ -1,0 +1,135 @@
+/*nav and before nav*/
+.navbar-wrapper{
+    background-color: #1d2124;
+    width: 100%;
+    height:250px !important;
+    color:white ;
+    padding: 13px;
+    opacity:0.9;
+}
+.navbar{
+    color: white !important;
+}
+.navbar-brand{
+    color: #f8f9fa !important;
+    font-size:54px;
+}
+.nav-link{
+    color:whitesmoke;
+    font-size: 24px;
+}
+.navbar-brand span{
+    color: #9fcdff;
+    font-size: 55px;
+    font-style: italic;
+    font-family: "Lucida Calligraphy";
+}
+@media screen and (max-width: 960px) {
+  .navbar-wrapper {
+    height: auto !important;
+  }
+}
+.nav-item:hover{
+    background-color: goldenrod;
+    border-bottom: 3px solid white;
+    border-top: 3px solid white;
+    transition-delay: 0.4s;
+}
+.afternav{
+    text-align: center;
+}
+.afternav h3::after{
+    border-bottom: 3px solid white;
+}
+.servicetag{
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top:-25px;
+    font-family: "Apple Color Emoji";
+    color:navajowhite;
+}
+
+/*body*/
+.form-inline input{
+    width: 300px !important;
+    border-radius: 24px;
+}
+.dashboard-stat {
+  display: block;
+  padding: 30px 15px;
+  text-align: right;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+    color:white !important;
+}
+
+.dashboard-stat .number {
+  font-size: 28px;
+  display: block;
+}
+
+.dashboard-stat .bg-icon {
+  position: absolute;
+  font-size: 80px;
+  opacity: 0.8;
+  left: 0;
+  bottom: 0;
+}
+
+.dashboard-stat:hover {
+  background: #292929 !important;
+}
+.footer-list{
+    list-style: none;
+    margin-left: 460px;
+}
+.dashboard-stat-2 {
+  display: block;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+}
+
+.dashboard-stat-2 .stat-content {
+  padding: 20px 15px 15px;
+  text-align: center;
+  position: relative;
+}
+
+.dashboard-stat-2 .number {
+  font-size: 28px;
+  display: block;
+}
+
+.dashboard-stat-2 .stat-footer {
+  background: #fff;
+  color: #292929;
+  text-align: center;
+  display: block;
+  padding: 8px;
+  font-size: 90%;
+}
+
+.dashboard-stat-2:hover {
+  background: #292929 !important;
+}
+
+@media (max-width: 768px) {
+  .dashboard-stat {
+    margin-bottom: 10px;
+  }
+  .dashboard-stat-2 {
+    margin-bottom: 10px;
+  }
+  .footer-list{
+      margin-left: 20px;
+  }
+}
+.section {
+  padding: 30px 0;
+}
+.footer{
+    margin-bottom: 0;
+}
+

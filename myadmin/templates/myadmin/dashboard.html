@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sellme | Dashboard</title>
+    <link rel="stylesheet" href="{% static 'myadmin/css/bootstrap.min.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'myadmin/css/font-awesome.min.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'myadmin/css/animate.min.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'myadmin/css/lobipanel/lobipanel.min.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'myadmin/css/toastr/toastr.min.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'myadmin/css/main.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'myadmin/css/styles.css' %}" media="screen" >
+    <link rel="stylesheet" href="{% static 'user/icons/css/all.css' %}">
+</head>
+<body class="top-navbar-fixed">
+<div class="main-wrapper">
+    {% include 'myadmin/topbar.html' %}
+    <div class="content-wrapper">
+        <div class="content-container">
+
+            {% include 'myadmin/leftbar.html' %}
+
+            <div class="main-page">
+                <div class="container-fluid">
+                    <div class="row page-title-div">
+                        <div class="col-sm-6">
+                            <h2 class="title">Dashboard</h2>
+
+                        </div>
+                        <!-- /.col-sm-6 -->
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+                <!-- /.container-fluid -->
+
+                <section class="section">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <a class="dashboard-stat bg-info" href="">
+                                    <span class="number counter">{{ users }}</span>
+                                    <span class="name">Regd Users</span>
+                                    <span class="bg-icon"><i class="fa fa-users"></i></span>
+                                </a>
+                                <!-- /.dashboard-stat -->
+                            </div>
+                            <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <a class="dashboard-stat bg-danger" href="">
+                                    <span class="number counter">{{ items }}</span>
+                                    <span class="name">Items Listed</span>
+                                    <span class="bg-icon"><i class="fa fa-ticket"></i></span>
+                                </a>
+                                <!-- /.dashboard-stat -->
+                            </div>
+                            <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <a class="dashboard-stat bg-warning" href="">
+                                    <span class="number counter">{{ payments }}</span>
+                                    <span class="name">Payments Made</span>
+                                    <span class="bg-icon"><i class="fa fa-bank"></i></span>
+                                </a>
+                                <!-- /.dashboard-stat -->
+                            </div>
+                            <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+
+                            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                <a class="dashboard-stat bg-success" href="">
+                                    <span class="number counter">4</span>
+                                    <span class="name">Items Returned</span>
+                                    <span class="bg-icon"><i class="fa fa-file-text"></i></span>
+                                </a>
+                                <!-- /.dashboard-stat -->
+                            </div>
+                            <!-- /.col-lg-3 col-md-3 col-sm-6 col-xs-12 -->
+
+                            <div class="row">
+                                <div class="col-md-8 offset-2">
+                                    <div class="container">
+                                <h2>USERS</h2>
+                                <ul class="responsive-table">
+                                    <li class="table-header">
+                                        <div class="col col-1"></div>
+                                        <div class="col col-2">Username</div>
+                                        <div class="col col-3">NAMES</div>
+                                        <div class="col col-4">EMAIL</div>
+                                        <div class="col col-4">DELETE</div>
+                                    </li>
+                                    {% for user in c_users %}
+                                    <li class="table-row">
+                                        <div class="col col-1" >{{ forloop.counter }}</div>
+                                        <div class="col col-2">{{ user.username }}</div>
+                                        <div class="col col-3">{{ user.firstname }} {{ user.secondname }}</div>
+                                        <div class="col col-4">{{ user.email }}</div>
+                                        <div class="col col-4"><i class="fas fa-trash" style="color: red;"></i></div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.container-fluid -->
+                </section>
+                <!-- /.section -->
+
+            </div>
+            <!-- /.main-page -->
+
+
+        </div>
+        <!-- /.content-container -->
+    </div>
+    <!-- /.content-wrapper -->
+
+</div>
+<!-- /.main-wrapper -->
+
+<!-- ========== COMMON JS FILES ========== -->
+<script src="{% static 'myadmin/js/jquery-2.2.4.min.js' %}"></script>
+<script src="{% static 'myadmin/js/jquery-ui/jquery-ui.min.js' %}"></script>
+<script src="{% static 'myadmin/js/bootstrap/bootstrap.min.js' %}"></script>
+<script src="{% static 'myadmin/js/lobipanel/lobipanel.min.js' %}"></script>
+
+
+<!-- ========== PAGE JS FILES ========== -->
+<script src="{% static 'myadmin/js/jquery.counterup.min.js' %}"></script>
+<script src="{% static 'myadmin/js/toastr/toastr.min.js' %}"></script>
+
+
+<!-- ========== THEME JS ========== -->
+<script src="{% static 'myadmin/js/main.js' %}"></script>
+<script>
+    $(function(){
+
+        // Counter for dashboard stats
+        $('.counter').counterUp({
+            delay: 10,
+            time: 1000
+        });
+
+        // Welcome notification
+        toastr.options = {
+            "closeButton": true,
+            "debug": false,
+            "newestOnTop": false,
+            "progressBar": false,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": false,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr["success"]( "Welcome to Admin Dashboard!");
+
+    });
+</script>
+</body>
+</html>
+

@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{%  block css %}
+    <style>
+        .styled-table {
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.9em;
+            font-family: sans-serif;
+            min-width: 400px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+        .styled-table thead tr {
+            background-color: #4267b2;
+            color: #ffffff;
+            text-align: left;
+        }
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+        }
+        .styled-table tbody tr {
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 2px solid #4267b2;
+        }
+        .styled-table tbody tr.active-row {
+            font-weight: bold;
+            color: #009879;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-2">
+            <h3>Successful Payments:</h3>
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Amount paid</th>
+                    <th>For</th>
+                    <th>Item Name</th>
+                    <th>Transaction Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if payments %}
+                    {%  for item in payments %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ item.Paying_user }}</td>
+                            <td>{{ item.Amount }}</td>
+                            <td>{{ item.payment_for }}</td>
+                            <td>{{ item.Paid_item.item_name }}</td>
+                            <th>{{ item.TransactionDate}}</th>
+                            <th><a href="{% url 'user:interest' %}"> Print receipt</a></th>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6">No successful Payments found.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table><br><br>
+
+            <h3>Unsuccessful Payments:</h3>
+            <table class="styled-table">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Amount paid</th>
+                    <th>For</th>
+                    <th>Item Name</th>
+                    <th>Transaction Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if failed_ps %}
+                    {%  for item in  failed_ps %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ item.Paying_user }}</td>
+                            <td>{{ item.Amount }}</td>
+                            <td>{{ item.payment_for }}</td>
+                            <td>{{ item.Paid_item.item_name }}</td>
+                            <th>{{ item.TransactionDate}}</th>
+                        </tr>
+                    {% endfor %}
+                {% else  %}
+                    <tr>
+                        <td colspan="6">No Unsuccessful Payments found.</td>
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+{% endblock %}

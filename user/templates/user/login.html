@@ -1,0 +1,284 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'user/loginslider/css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'user/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'user/icons/css/all.css' %}">
+    <title>Sellme/</title>
+</head>
+<body>
+<div class="containers containers-fluid">
+    <div class="forms-containers">
+        <div class="signin-signup">
+            <form action="{% url 'user:login' %}" name="loginform" method="POST" class="sign-in-form">
+                {% csrf_token %}
+                <h2 class="title">Sign in here</h2>
+                {% for message in messages %}
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Success!</strong> {{ message}}
+                    </div>
+                {% endfor %}
+                <div class="input-field" id="login_form_username">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="login_username" name="username" placeholder="Username" required/>
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="login_pass" name="password" placeholder="Password" required/>
+                </div>
+                <input type="submit"  id="login_submitbtn" value="Login" style="border-radius: 42%;" class="btn solid btn btn-primary btn-lg" disabled />
+                <p class="copy-text">Forgot password? <a href="{% url 'password_reset' %}">Reset Password</a></p>
+                <p class="copy-text">&copy; 2020. All Rights Reserved</p>
+                <h3 class="copy-text">Sellme Online Systems</h3>
+            </form>
+            <form action="{%  url 'user:register'%}" name="registerform"  method="POST" class="sign-up-form">
+                {% csrf_token %}
+                <h2 class="title">Sign up</h2>
+                <div class="row">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-field">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name="firstname" placeholder="First name" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-field">
+                                <i class="fas fa-user"></i>
+                                <input type="text" name="secondname" placeholder="Second name" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-field userfield">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="id_username" name="username" placeholder="Username" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-field emailfield">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" id="id_email" name="email" placeholder="Email" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-field">
+                                <i class="fas fa-lock-open"></i>
+                                <input type="number" name="id_no" placeholder="ID/Passport Number" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-field">
+                                <i class="fas fa-user-ninja"></i>
+                                <input type="number" name="phone" placeholder="Phone Number" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-field passfield">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="password" onkeyup="checkPasswordStrength()" name="password" placeholder="Password" required/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-field cpassfield">
+                                <i class="fas fa-lock"></i>
+                                <input type="password" id="cpassword" placeholder="Confirm Password" required/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 12%;"/>Sign up</button><br>
+                <p class="copy-text">&copy; 2021. All Rights Reserved</p>
+                <h3 class="copy-text"> Sellme Online Systems</h3>
+            </form>
+        </div>
+    </div>
+
+    <div class="panels-containers">
+        <div class="panel left-panel">
+            <div class="content">
+                <h3>Are You a new user?</h3>
+                <p>
+                    Welcome to Sellme Online Systems feel at home
+                </p>
+                <button class="btn transparent" id="sign-up-btn">
+                    Sign up here
+                </button>
+            </div>
+        </div>
+        <div class="panel right-panel">
+            <div class="content">
+                <h3>Already Registered?</h3>
+                <p>
+                    Stay Safe
+                </p>
+                <button class="btn transparent" id="sign-in-btn">
+                    Sign in
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'user/js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'user/js/popper.min.js' %}"></script>
+<script src="{% static 'user/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'user/loginslider/js/app.js' %}"></script>
+
+
+<script>
+    $("#id_username").keyup(function () {
+        var username = $(this).val();
+        if (username != "") {
+            $.ajax({
+                url: '{% url 'user:checkuser' %}',
+                type: 'POST',
+                data: {username: username}
+            })
+                .done(function (response) {
+                    console.log(response);
+                    if (response == "True") {
+                        $(".username_error").remove();
+                        $("<span class='username_error' style='padding: 5px;color: red;font-weight: bold; width:100%; margin:5px;'>Username is taken</span>").insertBefore(".userfield");
+                    } else {
+                        $(".username_error").remove();
+                        $("<span class='username_error' style='padding: 5px;color: green;font-weight: bold; width:100%; margin:5px;'>Username is available</span>").insertBefore(".userfield");
+                    }
+                })
+                .fail(function () {
+                    console.log("failed");
+                })
+        } else {
+            $(".username_error").remove();
+        }
+    });
+    $("#id_email").keyup(function () {
+        var email = $(this).val();
+        if (email != "") {
+            $.ajax({
+                url: '{% url 'user:checkemail' %}',
+                type: 'POST',
+                data: {email: email}
+            })
+                .done(function (response) {
+                    console.log(response);
+                    if (response == "True") {
+                        $(".email_error").remove();
+                        $("<span class='email_error' style='padding: 5px;color: red;font-weight: bold; width:100%; margin:5px;'>Email is Taken</span>").insertBefore(".emailfield");
+                    } else {
+                        $(".email_error").remove();
+                        $("<span class='email_error' style='padding: 5px;color: green;font-weight: bold; width:100%; margin:5px;'>Email is available</span>").insertBefore(".emailfield");
+                    }
+                })
+                .fail(function () {
+                    console.log("failed");
+                })
+        } else {
+            $(".email_error").remove();
+        }
+    });
+
+    $("#id_username").keyup(function () {
+        var username = $(this).val();
+        if (username != "") {
+            $.ajax({
+                url: '{% url 'user:checkuser' %}',
+                type: 'POST',
+                data: {username: username}
+            })
+                .done(function (response) {
+                    console.log(response);
+                    if (response == "True") {
+                        $(".username_error").remove();
+                        $("<span class='username_error' style='padding: 5px;color: red;font-weight: bold; width:100%; margin:5px;'>Username is taken</span>").insertBefore(".userfield");
+                    } else {
+                        $(".username_error").remove();
+                        $("<span class='username_error' style='padding: 5px;color: green;font-weight: bold; width:100%; margin:5px;'>Username is available</span>").insertBefore(".userfield");
+                    }
+                })
+                .fail(function () {
+                    console.log("failed");
+                })
+        } else {
+            $(".username_error").remove();
+        }
+    });
+    $("#login_pass").mouseout(function () {
+        var username= $('#login_username').val();
+        var password= $('#login_pass').val();
+        if (username != "" && password !=""){
+            $.ajax({
+                url: '{% url 'user:checkdetails' %}',
+                type: 'POST',
+                data: {username:username}
+            })
+                .done(function (response) {
+                    console.log(response);
+                    if (response == "True") {
+                        $('#login_submitbtn').removeAttr('disabled');
+                    } else {
+                        $(".user_error").remove();
+                        $("<div class=\"alert alert-danger alert-dismissible fade show user_error\" role=\"alert\">\n" +
+                            "  <strong>Error!</strong> User Details not Found.\n" +
+                            "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">\n" +
+                            "    <span aria-hidden=\"true\">&times;</span>\n" +
+                            "  </button>\n" +
+                            "</div>\n").insertBefore("#login_form_username");
+                    }
+                })
+                .fail(function () {
+                    console.log("failed");
+                })
+        } else {
+            $(".user_error").remove();
+        }
+    });
+
+    function checkPasswordStrength() {
+        var number = /([0-9])/;
+        var alphabets = /([a-zA-Z])/;
+        var special_characters = /([~,!,@,#,$,%,^,&,*,-,_,+,=,?,>,<])/;
+        if ($('#password').val().length < 6) {
+            $('.pass_error').remove();
+            $("<span class='pass_error' style='padding: 5px;color: red;font-weight: bold; width:100%; margin:5px;'>Weak Password</span>").insertBefore(".passfield");
+        } else {
+            if ($('#password').val().match(number) && $('#password').val().match(alphabets) && $('#password').val().match(special_characters)) {
+                $('.pass_error').remove();
+                $("<span class='pass_error' style='padding: 5px;color: green;font-weight: bold; width:100%; margin:5px;'>Strong password</span>").insertBefore(".passfield");
+            } else {
+                $('.pass_error').remove();
+                $("<span class='pass_error' style='padding: 5px;color: orange;font-weight: bold; width:100%; margin:5px;'> Passwordshould includealphabets, numbers and special characters.</span>").insertBefore(".passfield");
+            }
+
+
+        }
+    }
+    $('#cpassword').onmouseout(function(){
+        var pass = $('#password').val();
+        var pass2 = $('#cpassword').val();
+        if(pass != pass2){
+            alert('The passwords did not match');
+        }
+
+    });
+    $('#registerform input').keyup(function () {
+
+        var empty = false;
+        $('#registerform input').each(function () {
+            if ($(this).val() == '') {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $('#register').attr('disabled', 'disabled');
+        } else {
+            $('#register').removeAttr('disabled');
+        }
+    });
+</script>
+</body>
+</html>
